@@ -43,10 +43,10 @@ def export_submissions(subreddit:str, query:str, timestamps:datetime.timedelta, 
                 with open(f"{file_export_name}.json", 'a', encoding='utf-8') as f:
                     json.dump(submission, f, ensure_ascii=False, indent=4)
                 
-                print("Data exported to {name}".format(name=file_export_name))
+                print(f"Data exported to {file_export_name}")
 
             except json.decoder.JSONDecodeError:
-                print("Failed to parse: {api_call}")
+                print(f"Failed to parse: {api_call}")
                 print("Adding url to an errors text file") 
 
                 with open(f"{file_export_name}_error_url.txt", 'a', encoding='utf-8') as error_file:
