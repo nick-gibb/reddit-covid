@@ -25,7 +25,6 @@ def export_submissions(subreddit:str, query:str, timestamps:datetime.timedelta, 
         for num_retry in range(num_retries+1):
 
             try:
-                query = "covid"
 
                 if i == len(timestamps)-1:
                     break
@@ -43,16 +42,16 @@ def export_submissions(subreddit:str, query:str, timestamps:datetime.timedelta, 
                 with open(f"{file_export_name}.json", 'a', encoding='utf-8') as f:
                     json.dump(submission, f, ensure_ascii=False, indent=4)
                 
-                print(f"Data exported to {file_export_name}")
+                print(f"Data exported to {file_export_name}.csv")
 
             except json.decoder.JSONDecodeError:
                 print(f"Failed to parse: {api_call}")
-                print("Adding url to an errors text file") 
+                print(f"Adding url to {file_export_name}_errors.txt file") 
 
                 with open(f"{file_export_name}_error_url.txt", 'a', encoding='utf-8') as error_file:
                     error_file.write("{api_call}\n")
                 
-                print("Done adding url to errors.txt file.  Continuing on...") 
+                print(f"Done adding url to {file_export_name}_errors.txt file.  Continuing on...") 
                 continue 
 
             break
